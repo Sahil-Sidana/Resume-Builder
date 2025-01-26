@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import useResumeStore from '../../app/ResumeStore';
 import html2pdf from 'html2pdf.js';
-import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
+import Download from './Download';
 
 const Template2 = () => {
   const {
@@ -29,7 +29,7 @@ const Template2 = () => {
 
   const handleDownload = () => {
       const element = document.getElementById('template2');
-      console.log('hi',element)
+      // console.log('hi',element)
       html2pdf(element);
   };
 
@@ -54,18 +54,7 @@ const Template2 = () => {
         flexDirection: 'column',
       }}
     >
-      {/* Download Button */}
-      <Box sx={{ textAlign: 'center', marginBottom: 4 }}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleDownload}
-          sx={{ textTransform: 'none' }}
-          endIcon={<DownloadForOfflineIcon />}
-        >
-          Download
-        </Button>
-      </Box>
+      <Download handleDownload={handleDownload} />
       <Box id="template2" sx={{ backgroundColor: 'white', padding: 4, borderRadius: 2 }}>
       {/* Header Section */}
       {isNonEmpty(personalDetails) && (

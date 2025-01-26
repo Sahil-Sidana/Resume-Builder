@@ -7,6 +7,8 @@ import { ToastContainer } from 'react-toastify'; // Import ToastContainer
 import 'react-toastify/dist/ReactToastify.css'; // Import CSS for react-toastify
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Template from './pages/resumeTemplates/Template'
+import './index.css';
+import { createTheme, fontFamily, ThemeProvider } from '@mui/system';
 
 export default function App() {
   return (
@@ -29,7 +31,7 @@ export default function App() {
           </Box>
         </>
         } />
-      <Route path="/:name/template/:id" element={<Template/>} />
+      <Route path="/:name/template/:tname" element={<Template/>} />
       
       </Routes>
       <ToastContainer /> 

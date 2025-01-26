@@ -3,6 +3,7 @@ import { Box, Typography, Paper, Grid2, Divider, Button } from "@mui/material"
 import DownloadForOfflineIcon from "@mui/icons-material/DownloadForOffline"
 import html2pdf from "html2pdf.js"
 import useResumeStore from "../../app/ResumeStore"
+import Download from './Download'
 
 const Template3 = () => {
   const handleDownload = () => {
@@ -24,23 +25,7 @@ const Template3 = () => {
 
   return (
     <>
-      <Button
-      variant="contained"
-      color="primary"
-      onClick={handleDownload}
-      endIcon={<DownloadForOfflineIcon />}
-      sx={{
-        mb: 2,
-        mt: 2,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        mx: "auto",
-      }}
-    >
-      Download
-    </Button>
-
+      <Download handleDownload={handleDownload} />
 
       <Paper
         id="template3"
@@ -84,6 +69,7 @@ const Template3 = () => {
               }}
             >
               {/* Education Section */}
+              {isNonEmpty(data.education) && (
               <Box sx={{ mb: 4 }}>
                 <Typography
                   variant="h6"
@@ -111,9 +97,10 @@ const Template3 = () => {
                     <Divider sx={{ my: 1 }} />
                   </Box>)
                 ))}
-              </Box>
+              </Box>)}
 
               {/* Work Experience Section */}
+              {isNonEmpty(data.workExperience) && (
               <Box sx={{ mb: 4 }}>
                 <Typography
                   variant="h6"
@@ -138,9 +125,10 @@ const Template3 = () => {
                     <Divider sx={{ mt: 2 }} />
                   </Box>)
                 ))}
-              </Box>
+              </Box>)}
 
               {/* Skills Section */}
+              {data.skills.length>0 && (
               <Box sx={{ mb: 4 }}>
                 <Typography
                   variant="h6"
@@ -174,9 +162,10 @@ const Template3 = () => {
                     </Box>
                   ))}
                 </Box>
-              </Box>
+              </Box>)}
 
               {/* Projects Section */}
+              {isNonEmpty(data.projects) && (
               <Box sx={{ mb: 4 }}>
                 <Typography
                   variant="h6"
@@ -208,13 +197,14 @@ const Template3 = () => {
                     <Divider sx={{ mt: 2 }} />
                   </Box>)
                 ))}
-              </Box>
+              </Box>)}
             </Box>
           </Grid2>
 
           {/* Right Column */}
           <Grid2 item xs={12} md={8}>
             {/* Achievements Section */}
+            {data.achievements.length>0 && (
             <Box sx={{ mb: 4 }}>
               <Typography
                 variant="h6"
@@ -233,7 +223,7 @@ const Template3 = () => {
                   </Box>
                 ))}
               </Box>
-            </Box>
+            </Box>)}
 
             {/* Certificates Section */}
             {isNonEmpty(data.certificates) && (

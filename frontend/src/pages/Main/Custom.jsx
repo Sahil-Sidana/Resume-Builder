@@ -4,14 +4,17 @@ import useResumeStore from "../../app/ResumeStore"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import ToastTheme from "../../utils/ToastTheme"
-import CategoryIcon from "@mui/icons-material/Category";
+import CategoryIcon from "@mui/icons-material/Category"
+import CodingProfiles from "./CodingProfiles"
+import ExtraCurricular from "./ExtraCurricular"
+import Review from "./Review" // Import the Review component
 
-const Custom = () => {
+const Custom = ({ fromReview }) => {
   const customDetails = useResumeStore((state) => state.resume.customDetails)
   const editObjectField = useResumeStore((state) => state.editObjectField)
   const [headingError, setHeadingError] = useState("")
   const [descError, setDescError] = useState("")
-
+  const [currentStep, setCurrentStep] = useState("Custom")
   const customFields = {
     heading: "",
     description: "",
@@ -55,10 +58,19 @@ const Custom = () => {
     toast.success("Custom section details saved successfully!", ToastTheme)
   }
 
+  if (currentStep === "CodingProfiles") {
+    return <CodingProfiles />
+  }
+  if (currentStep === "ExtraCurricular") {
+    return <ExtraCurricular />
+  }
+  if (currentStep === "Review") {
+    return <Review />
+  }
   return (
     <>
       <Box className="max-w-xl mx-auto p-4 space-y-6 bg-white rounded-lg shadow-md">
-        <CategoryIcon/>
+        <CategoryIcon />
         <h1 className="text-2xl font-bold text-center mb-4">Custom Section</h1>
         <TextField
           label="Section Heading"
@@ -96,6 +108,20 @@ const Custom = () => {
           Save Details
         </Button>
       </Box>
+      <div className="w-full max-w-xl mx-auto flex justify-between mt-4">
+        <button
+          onClick={() => setCurrentStep("CodingProfiles")}
+          className="py-3 px-8 rounded-lg text-sm font-medium transition-transform transform-gpu bg-gray-200 text-gray-700 hover:bg-gray-300 hover:scale-105 shadow-md"
+        >
+          Back
+        </button>
+        <button
+          onClick={() => (fromReview ? setCurrentStep("Review") : setCurrentStep("ExtraCurricular"))}
+          className="py-3 px-8 bg-blue-500 text-white rounded-lg text-sm font-medium hover:bg-blue-600 hover:scale-105 shadow-md transition-transform transform-gpu"
+        >
+          Next
+        </button>
+      </div>
     </>
   )
 }
