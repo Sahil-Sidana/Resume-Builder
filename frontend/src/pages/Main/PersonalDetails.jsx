@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Box, TextField, Button } from "@mui/material"
-import useResumeStore from "../../app/ResumeStore"
+import useResumeStore from "../../store/ResumeStore"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import ToastTheme from "../../utils/ToastTheme"
@@ -9,6 +9,7 @@ import PersonIcon from "@mui/icons-material/Person"
 import BriefDescription from "./BriefDescription"
 import Review from "./Review" 
 import Home from "./Home"
+import ProgressBar from "../../components/ProgressBar"
 
 export default function PersonalDetails({ fromReview }) {
   const personalDetails = useResumeStore((state) => state.resume.personalDetails)
@@ -76,6 +77,7 @@ export default function PersonalDetails({ fromReview }) {
   }
   return (
     <div className="flex flex-col items-center mt-8 mb-8">
+      <ProgressBar step="PersonalDetails" />
       <Box className="max-w-xl w-full p-6 space-y-6 bg-white rounded-lg shadow-md mb-6">
         <div className="flex justify-center items-center mb-4">
           <PersonIcon className="mr-2" />
@@ -157,7 +159,7 @@ export default function PersonalDetails({ fromReview }) {
         {fromReview && (
           <button
             onClick={handleGoBackToReview}
-            className="py-3 px-8 rounded-lg text-sm font-medium transition-transform transform-gpu bg-gray-200 text-gray-700 hover:bg-gray-300 hover:scale-105 shadow-md"          >
+            className="py-3 px-8 rounded-lg text-sm font-medium transition-transform transform-gpu bg-yellow-500 text-white hover:bg-yellow-600 hover:scale-105 shadow-md"          >
             Go Back to Review
           </button>
         )}

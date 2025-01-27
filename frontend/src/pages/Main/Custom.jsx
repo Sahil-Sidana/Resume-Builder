@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { TextField, Button, Box, Typography } from "@mui/material"
-import useResumeStore from "../../app/ResumeStore"
+import useResumeStore from "../../store/ResumeStore"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import ToastTheme from "../../utils/ToastTheme"
 import CategoryIcon from "@mui/icons-material/Category"
 import CodingProfiles from "./CodingProfiles"
 import ExtraCurricular from "./ExtraCurricular"
-import Review from "./Review" // Import the Review component
+import Review from "./Review" 
+import ProgressBar from "../../components/ProgressBar"
 
 const Custom = ({ fromReview }) => {
   const customDetails = useResumeStore((state) => state.resume.customDetails)
@@ -68,7 +69,8 @@ const Custom = ({ fromReview }) => {
     return <Review />
   }
   return (
-    <>
+    <div className="mt-8">
+      <ProgressBar step="CustomSection" />
       <Box className="max-w-xl mx-auto p-4 space-y-6 bg-white rounded-lg shadow-md">
         <CategoryIcon />
         <h1 className="text-2xl font-bold text-center mb-4">Custom Section</h1>
@@ -130,7 +132,7 @@ const Custom = ({ fromReview }) => {
           Next
         </button>
       </div>
-    </>
+    </div>
   )
 }
 

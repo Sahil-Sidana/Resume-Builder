@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Box, TextField, Button, Typography } from "@mui/material"
-import useResumeStore from "../../../app/ResumeStore"
+import useResumeStore from "../../../store/ResumeStore"
 import ProjectEntry from "./ProjectEntry"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -10,6 +10,7 @@ import CodeIcon from "@mui/icons-material/Code"
 import Education from "../Education/Education"
 import Skills from "../Skills"
 import Review from "../Review"
+import ProgressBar from "../../../components/ProgressBar"
 
 export default function Projects({ fromReview }) {
   const projectsStore = useResumeStore((state) => state.resume.projects)
@@ -77,7 +78,8 @@ export default function Projects({ fromReview }) {
   }
 
   return (
-    <>
+    <div className="mt-8">
+      <ProgressBar step="Projects" />
       <Box className="max-w-xl mx-auto p-4 space-y-6 bg-white rounded-lg shadow-md mt-8">
         <CodeIcon />
         <h1 className="text-2xl font-bold text-center mb-4">Projects</h1>
@@ -169,6 +171,6 @@ export default function Projects({ fromReview }) {
           Next
         </button>
       </div>
-    </>
+    </div>
   )
 }

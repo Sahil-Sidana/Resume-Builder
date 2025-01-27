@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Box, TextField, Button, Typography, List, ListItem, ListItemText, IconButton } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
-import useResumeStore from "../../app/ResumeStore"
+import useResumeStore from "../../store/ResumeStore"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import ToastTheme from "../../utils/ToastTheme"
@@ -9,6 +9,7 @@ import ComputerIcon from "@mui/icons-material/Computer"
 import Certificates from "./Certificates"
 import Custom from "./Custom"
 import Review from "./Review" 
+import ProgressBar from "../../components/ProgressBar"
 
 export default function CodingProfiles({ fromReview }) {
   const [currentProfile, setCurrentProfile] = useState({
@@ -68,7 +69,8 @@ export default function CodingProfiles({ fromReview }) {
     return <Review />
   }
   return (
-    <>
+    <div className="mt-8">
+      <ProgressBar step="CodingProfiles"/>
       <Box className="max-w-xl mx-auto p-4 space-y-6 bg-white rounded-lg shadow-md mt-8 mb-8">
         <ComputerIcon />
         <h1 className="text-2xl font-bold text-center mb-4">Coding Profiles</h1>
@@ -141,7 +143,7 @@ export default function CodingProfiles({ fromReview }) {
       <div className="w-full max-w-xl mx-auto flex justify-between mt-4">
         <button
           onClick={() => setCurrentStep("Certificates")}
-          className="py-3 px-8 rounded-lg text-sm font-medium transition-transform transform-gpu bg-gray-200 text-gray-700 hover:bg-gray-300 hover:scale-105 shadow-md"
+          className="py-3 px-8 rounded-lg text-sm font-medium transition-transform transform-gpu bg-gray-200 text-gray-700 hover:bg-gray-300 hover:scale-105 shadow-md mb-4"
         >
           Back
         </button>
@@ -155,12 +157,12 @@ export default function CodingProfiles({ fromReview }) {
         )}
         <button
           onClick={() => (fromReview ? setCurrentStep("Review") : setCurrentStep("Custom"))}
-          className="py-3 px-8 bg-blue-500 text-white rounded-lg text-sm font-medium hover:bg-blue-600 hover:scale-105 shadow-md transition-transform transform-gpu"
+          className="py-3 px-8 bg-blue-500 text-white rounded-lg text-sm font-medium hover:bg-blue-600 hover:scale-105 shadow-md transition-transform transform-gpu mb-4"
         >
           Next
         </button>
       </div>
-    </>
+    </div>
   )
 }
 

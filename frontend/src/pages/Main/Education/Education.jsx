@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Box, Button, TextField, Typography } from "@mui/material"
-import useResumeStore from "../../../app/ResumeStore"
+import useResumeStore from "../../../store/ResumeStore"
 import EducationEntry from "./EducationEntry"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
@@ -10,6 +10,7 @@ import SchoolIcon from "@mui/icons-material/School"
 import WorkExperience from "../WorkExperience/WorkExperience"
 import Projects from "../Project/Projects"
 import Review from "../Review"
+import ProgressBar from "../../../components/ProgressBar"
 
 export default function Education({ fromReview }) {
   const education = useResumeStore((state) => state.resume.education)
@@ -109,7 +110,8 @@ export default function Education({ fromReview }) {
   }
 
   return (
-    <>
+    <div className="mt-8">
+      <ProgressBar step="Education" />
       <Box className="max-w-xl mx-auto p-4 space-y-6 bg-white rounded-lg shadow-md mt-8">
         <SchoolIcon />
         <Typography variant="h5" sx={{ fontWeight: 600, marginBottom: 2, textAlign: "center" }}>
@@ -238,6 +240,6 @@ export default function Education({ fromReview }) {
           </button>
         </div>
       </div>
-    </>
+    </div>
   )
 }

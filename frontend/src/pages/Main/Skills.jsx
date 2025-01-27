@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Box, Button, Chip, Autocomplete, TextField } from "@mui/material"
-import useResumeStore from "../../app/ResumeStore"
+import useResumeStore from "../../store/ResumeStore"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import ToastTheme from "../../utils/ToastTheme"
@@ -9,6 +9,7 @@ import BuildIcon from "@mui/icons-material/Build"
 import Projects from "./Project/Projects"
 import Achievements from "./Achievements"
 import Review from "./Review"
+import ProgressBar from "../../components/ProgressBar"
 
 export default function Skills({ fromReview }) {
   const [currentSkill, setCurrentSkill] = useState("")
@@ -56,7 +57,8 @@ export default function Skills({ fromReview }) {
     return <Review />
   }
   return (
-    <>
+    <div className="mt-8">
+      <ProgressBar step="Skills"/>
       <Box className="mt-8 mb-8 max-w-4xl mx-auto">
         <BuildIcon />
         <h1 className="text-2xl font-bold text-center mb-4">Skills</h1>
@@ -121,7 +123,7 @@ export default function Skills({ fromReview }) {
           Next
         </button>
       </div>
-    </>
+    </div>
   )
 }
 

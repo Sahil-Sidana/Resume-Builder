@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Box, TextField, Button, List, ListItem, ListItemText, IconButton, Typography } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
-import useResumeStore from "../../app/ResumeStore"
+import useResumeStore from "../../store/ResumeStore"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import ToastTheme from "../../utils/ToastTheme"
@@ -9,6 +9,7 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents"
 import Certificates from "./Certificates"
 import Skills from "./Skills"
 import Review from "./Review"
+import ProgressBar from "../../components/ProgressBar"
 
 export default function Achievements({ fromReview }) {
   const [currentAchievement, setCurrentAchievement] = useState("")
@@ -53,7 +54,8 @@ export default function Achievements({ fromReview }) {
     return <Review />
   }
   return (
-    <>
+    <div className="mt-8">
+      <ProgressBar step="Achievements"/>
       <Box className="mt-8 mb-8 max-w-4xl mx-auto">
         <EmojiEventsIcon />
         <h1 className="text-2xl font-bold text-center mb-4">Achievements</h1>
@@ -101,7 +103,7 @@ export default function Achievements({ fromReview }) {
           Next
         </button>
       </div>
-    </>
+    </div>
   )
 }
 

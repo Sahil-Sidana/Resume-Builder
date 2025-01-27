@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react"
 import { Box, TextField, Button, Typography } from "@mui/material"
-import useResumeStore from "../../app/ResumeStore"
+import useResumeStore from "../../store/ResumeStore"
 import { toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import ToastTheme from "../../utils/ToastTheme"
 import DescriptionIcon from "@mui/icons-material/Description"
 import PersonalDetails from "./PersonalDetails"
 import WorkExperience from "./WorkExperience/WorkExperience"
-import Review from "./Review" // Import the Review component
+import Review from "./Review" 
+import ProgressBar from "../../components/ProgressBar"
 
 export default function BriefDescription({ fromReview }) {
   const briefDescription = useResumeStore((state) => state.resume.briefDescription)
@@ -61,6 +62,7 @@ export default function BriefDescription({ fromReview }) {
 
   return (
     <div className="flex flex-col items-center mt-8 mb-8">
+      <ProgressBar step="BriefDescription" />
       <Box className="max-w-xl w-full p-6 space-y-6 bg-white rounded-lg shadow-md mb-6">
         <div className="flex justify-center items-center mb-4">
           <DescriptionIcon className="mr-2" />
