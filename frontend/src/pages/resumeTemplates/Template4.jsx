@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Paper, Button, Link, Grid2 } from "@mui/material";
+import { Box, Typography, Paper, Button, Link, Grid } from "@mui/material";
 import {
   Mail,
   Phone,
@@ -40,53 +40,51 @@ const Template4 = () => {
             p: 4,
           }}
         >
-          <Grid2 container spacing={2}>
-            <Grid2 item xs={12} md={8}>
-              <Typography variant="h3" sx={{ mb: 1 }}>
-                {data.personalDetails.firstName} {data.personalDetails.lastName}
-              </Typography>
-              <Typography variant="body1" sx={{ color: "#cbd5e1" }}>
-                {data.briefDescription}
-              </Typography>
-            </Grid2>
-            <Grid2 item xs={12} md={4}>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 1.5,
-                  alignItems: { xs: "flex-start", md: "flex-end" },
-                }}
-              >
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  <Mail sx={{ color: "#94a3b8" }} />
-                  <Typography>{data.personalDetails.email}</Typography>
-                </Box>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  <Phone sx={{ color: "#94a3b8" }} />
-                  <Typography>{data.personalDetails.phoneNumber}</Typography>
-                </Box>
-                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  <LinkedIn sx={{ color: "#94a3b8" }} />
-                  <Link
-                    href={data.personalDetails.linkedIn}
-                    target="_blank"
-                    color="inherit"
-                    underline="hover"
-                  >
-                    LinkedIn
-                  </Link>
-                </Box>
-              </Box>
-            </Grid2>
-          </Grid2>
+          <Grid container spacing={2}>
+          <Grid container spacing={2} alignItems="center">
+        <Grid item xs={12} md={8}>
+          <Typography variant="h3" sx={{ mb: 1 }}>
+            {data.personalDetails.firstName} {data.personalDetails.lastName}
+          </Typography>
+          <Typography variant="body1" sx={{ color: "#cbd5e1" }}>
+            {data.briefDescription}
+          </Typography>
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 1.5,
+              alignItems: { xs: "flex-start", md: "flex-end" },
+              textAlign: { xs: "left", md: "right" },
+            }}
+          >
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Mail sx={{ color: "#94a3b8" }} />
+              <Typography>{data.personalDetails.email}</Typography>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <Phone sx={{ color: "#94a3b8" }} />
+              <Typography>{data.personalDetails.phoneNumber}</Typography>
+            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+              <LinkedIn sx={{ color: "#94a3b8" }} />
+              <Link href={data.personalDetails.linkedIn} target="_blank" color="inherit" underline="hover">
+                LinkedIn
+              </Link>
+            </Box>
+          </Box>
+        </Grid>
+      </Grid>
+          </Grid>
         </Box>
 
         {/* Content Section */}
         <Box sx={{ p: 4 }}>
-          <Grid2 container spacing={4}>
+          <Grid container spacing={4}>
             {/* Left Column */}
-            <Grid2 item xs={12} md={8}>
+            <Grid item xs={12} md={8}>
               {/* Education */}
               {filterEmptySections(data.education).length > 0 && (
                 <Box sx={{ mb: 6 }}>
@@ -194,10 +192,10 @@ const Template4 = () => {
               </Box>
             )}
 
-            </Grid2>
+            </Grid>
 
             {/* Right Column */}
-            <Grid2 item xs={12} md={4}>
+            <Grid item xs={12} md={4}>
               {/* Skills */}
               {data.skills.length > 0 && (
                 <Box sx={{ mb: 6 }}>
@@ -279,8 +277,8 @@ const Template4 = () => {
                   ))}
                 </Box>
               )}
-            </Grid2>
-          </Grid2>
+            </Grid>
+          </Grid>
         </Box>
       </Paper>
     </>
