@@ -7,7 +7,8 @@ import ToastTheme from "../../utils/ToastTheme"
 import { PersonalDetailsSchema } from "../../schemas/PersonalDetailsSchema"
 import PersonIcon from "@mui/icons-material/Person"
 import BriefDescription from "./BriefDescription"
-import Review from "./Review" // Import the Review component
+import Review from "./Review" 
+import Home from "./Home"
 
 export default function PersonalDetails({ fromReview }) {
   const personalDetails = useResumeStore((state) => state.resume.personalDetails)
@@ -33,12 +34,12 @@ export default function PersonalDetails({ fromReview }) {
     setLocalPersonalDetails((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSave = async () => {
+  const handleSave = async (id) => {
     try {
       await PersonalDetailsSchema.validate(localPersonalDetails, { abortEarly: false })
       setErrors({})
       editSimpleField("personalDetails", localPersonalDetails)
-      toast.success("Details saved successfully", ToastTheme)
+      if(id!==1) toast.success("Details saved successfully", ToastTheme)
       return true
     } catch (err) {
       const newErrors = {}
@@ -51,16 +52,16 @@ export default function PersonalDetails({ fromReview }) {
   }
 
   const handleNext = async () => {
-    const isValid = await handleSave()
+    const isValid = await handleSave(1)
     if (isValid) {
-      if (fromReview) {
-        setCurrentStep("Review")
-      } else {
-        setCurrentStep("BriefDescription")
-      }
+      setCurrentStep("BriefDescription")
     } else {
       toast.error("Please fill all required fields correctly", ToastTheme)
     }
+  }
+
+  const handleGoBackToReview = () => {
+    setCurrentStep("Review")
   }
 
   if (currentStep === "BriefDescription") {
@@ -70,9 +71,11 @@ export default function PersonalDetails({ fromReview }) {
   if (currentStep === "Review") {
     return <Review />
   }
-
+  if(currentStep === "Home") {
+    return <Home />
+  }
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mt-8 mb-8">
       <Box className="max-w-xl w-full p-6 space-y-6 bg-white rounded-lg shadow-md mb-6">
         <div className="flex justify-center items-center mb-4">
           <PersonIcon className="mr-2" />
@@ -146,11 +149,18 @@ export default function PersonalDetails({ fromReview }) {
       </Box>
       <div className="w-full max-w-xl mx-auto flex justify-between mt-4">
         <button
-          disabled={true}
-          className="py-3 px-8 rounded-lg text-sm font-medium transition-transform transform-gpu bg-gray-300 text-gray-500 cursor-not-allowed shadow-md"
+          onClick={() => setCurrentStep("Home")}
+          className="py-3 px-8 rounded-lg text-sm font-medium transition-transform transform-gpu bg-gray-200 text-gray-700 hover:bg-gray-300 hover:scale-105 shadow-md"
         >
           Back
         </button>
+        {fromReview && (
+          <button
+            onClick={handleGoBackToReview}
+            className="py-3 px-8 rounded-lg text-sm font-medium transition-transform transform-gpu bg-gray-200 text-gray-700 hover:bg-gray-300 hover:scale-105 shadow-md"          >
+            Go Back to Review
+          </button>
+        )}
         <button
           onClick={handleNext}
           className="py-3 px-8 bg-blue-500 text-white rounded-lg text-sm font-medium hover:bg-blue-600 hover:scale-105 shadow-md transition-transform transform-gpu"
@@ -161,4 +171,3 @@ export default function PersonalDetails({ fromReview }) {
     </div>
   )
 }
-

@@ -26,17 +26,13 @@ export default function BriefDescription({ fromReview }) {
   }
 
   const handleNext = async () => {
-    const isValid = await handleSave()
+    const isValid = await handleSave(1)
     if (isValid) {
-      if (fromReview) {
-        setCurrentStep("Review")
-      } else {
-        setCurrentStep("WorkExperience")
-      }
+      setCurrentStep("WorkExperience")
     }
   }
 
-  const handleSave = async () => {
+  const handleSave = async (id) => {
     if (description.trim() === "") {
       setErrors("Description cannot be empty")
       return false
@@ -49,7 +45,7 @@ export default function BriefDescription({ fromReview }) {
     }
     setErrors(undefined)
     editSimpleField("briefDescription", description)
-    toast.success("Description saved!", ToastTheme)
+    if(id!==1) toast.success("Description saved!", ToastTheme)
     return true
   }
 
@@ -64,7 +60,7 @@ export default function BriefDescription({ fromReview }) {
   }
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center mt-8 mb-8">
       <Box className="max-w-xl w-full p-6 space-y-6 bg-white rounded-lg shadow-md mb-6">
         <div className="flex justify-center items-center mb-4">
           <DescriptionIcon className="mr-2" />
@@ -100,6 +96,14 @@ export default function BriefDescription({ fromReview }) {
         >
           Back
         </button>
+        {fromReview && (
+          <button
+            onClick={() => setCurrentStep("Review")}
+            className="py-3 px-8 bg-yellow-500 text-white rounded-lg text-sm font-medium hover:bg-yellow-600 hover:scale-105 shadow-md transition-transform transform-gpu"
+          >
+            Go Back to Review
+          </button>
+        )}
         <button
           onClick={handleNext}
           className="py-3 px-8 bg-blue-500 text-white rounded-lg text-sm font-medium hover:bg-blue-600 hover:scale-105 shadow-md transition-transform transform-gpu"
@@ -110,4 +114,3 @@ export default function BriefDescription({ fromReview }) {
     </div>
   )
 }
-

@@ -8,7 +8,7 @@ import ToastTheme from "../../utils/ToastTheme"
 import ComputerIcon from "@mui/icons-material/Computer"
 import Certificates from "./Certificates"
 import Custom from "./Custom"
-import Review from "./Review" // Import the Review component
+import Review from "./Review" 
 
 export default function CodingProfiles({ fromReview }) {
   const [currentProfile, setCurrentProfile] = useState({
@@ -69,7 +69,7 @@ export default function CodingProfiles({ fromReview }) {
   }
   return (
     <>
-      <Box className="max-w-xl mx-auto p-4 space-y-6 bg-white rounded-lg shadow-md">
+      <Box className="max-w-xl mx-auto p-4 space-y-6 bg-white rounded-lg shadow-md mt-8 mb-8">
         <ComputerIcon />
         <h1 className="text-2xl font-bold text-center mb-4">Coding Profiles</h1>
         <TextField
@@ -145,6 +145,14 @@ export default function CodingProfiles({ fromReview }) {
         >
           Back
         </button>
+        {fromReview && (
+          <button
+            onClick={() => setCurrentStep("Review")}
+            className="py-3 px-8 bg-yellow-500 text-white rounded-lg text-sm font-medium hover:bg-yellow-600 hover:scale-105 shadow-md transition-transform transform-gpu"
+          >
+            Go Back to Preview
+          </button>
+        )}
         <button
           onClick={() => (fromReview ? setCurrentStep("Review") : setCurrentStep("Custom"))}
           className="py-3 px-8 bg-blue-500 text-white rounded-lg text-sm font-medium hover:bg-blue-600 hover:scale-105 shadow-md transition-transform transform-gpu"
