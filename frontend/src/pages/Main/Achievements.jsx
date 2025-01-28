@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { Box, TextField, Button, List, ListItem, ListItemText, IconButton, Typography } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import useResumeStore from "../../store/ResumeStore"
@@ -12,12 +12,14 @@ import Review from "./Review"
 import ProgressBar from "../../components/ProgressBar"
 
 export default function Achievements({ fromReview }) {
+  
   const [currentAchievement, setCurrentAchievement] = useState("")
   const achievementsStore = useResumeStore((state) => state.resume.achievements) || []
   const addResumeEntry = useResumeStore((state) => state.addResumeEntry)
   const deleteResumeEntry = useResumeStore((state) => state.deleteResumeEntry)
   const [error, setError] = useState(undefined)
   const [currentStep, setCurrentStep] = useState("Achievements")
+
   const handleAddAchievement = () => {
     if (currentAchievement === "") {
       setError("Please enter a valid skill!")
@@ -96,6 +98,14 @@ export default function Achievements({ fromReview }) {
         >
           Back
         </button>
+        {fromReview && (
+          <button
+            onClick={() => setCurrentStep("Review")}
+            className="py-3 px-8 bg-yellow-500 text-white rounded-lg text-sm font-medium hover:bg-yellow-600 hover:scale-105 shadow-md transition-transform transform-gpu"
+          >
+            Go Back to Review
+          </button>
+        )}
         <button
           onClick={() => (fromReview ? setCurrentStep("Review") : setCurrentStep("Certificates"))}
           className="py-3 px-8 bg-blue-500 text-white rounded-lg text-sm font-medium hover:bg-blue-600 hover:scale-105 shadow-md transition-transform transform-gpu"
